@@ -1,4 +1,4 @@
-This blog is started as a clone of (gatsby-starter-morning-dew)[https://github.com/maxpou/gatsby-starter-morning-dew]
+This blog is started as a clone of [gatsby-starter-morning-dew](https://github.com/maxpou/gatsby-starter-morning-dew)
 
 Setup:
 ```bash
@@ -16,7 +16,7 @@ git push -u origin master
 
 To Netlify:
 
-* (Instructions)[https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/deploying-to-netlify/]
-* (Quick deploy)[https://app.netlify.com/start/deploy?repository=https://github.com/binordev/binor-blog]
-* Choose a domain via (domain settings)[https://app.netlify.com/sites/binor/settings/domain]
-* Browse to your (site)[https://binor.netlify.app]
+* [Instructions](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/deploying-to-netlify/)
+* [Quick deploy](https://app.netlify.com/start/deploy?repository=https://github.com/binordev/binor-blog)
+* Choose a domain via [domain settings](https://app.netlify.com/sites/binor/settings/domain)
+* Browse to your [site](https://binor.netlify.app)
