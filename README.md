@@ -19,4 +19,5 @@ To Netlify:
 * [Instructions](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/deploying-to-netlify/)
 * [Quick deploy](https://app.netlify.com/start/deploy?repository=https://github.com/binordev/binor-blog)
 * Choose a domain via [domain settings](https://app.netlify.com/sites/binor/settings/domain)
+* Trigger [deploys](https://app.netlify.com/sites/binor/deploys)
 * Browse to your [site](https://binor.netlify.app)
