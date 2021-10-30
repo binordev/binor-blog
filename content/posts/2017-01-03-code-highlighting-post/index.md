@@ -5,6 +5,7 @@ cover: ./cover.png
 disqus: false
 generate-card: false
 date: 2017-01-03
+published: false
 language: en
 tags:
     - gatsby

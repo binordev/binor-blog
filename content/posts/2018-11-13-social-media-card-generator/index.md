@@ -2,6 +2,7 @@
 title: "How to generate social share images"
 slug: social-media-card-generator
 date: 2018-11-13
+published: false
 language: en
 cover: ./cover-balloons.jpg
 disqus: false
