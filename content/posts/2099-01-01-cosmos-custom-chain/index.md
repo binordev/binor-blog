@@ -26,6 +26,8 @@ The blog is based on starport v0.18.0. I'll be using the [current latest which i
 
 ## Install Starport including GO
 
+From a WSL terminal:
+
 ```bash
 # Check that starport is not yet installed
 starport version
@@ -86,6 +88,8 @@ starport version
 
 ## Scaffold a chain
 
+From a WSL terminal:
+
 ```bash
 # goto homedir
 cd ~
@@ -136,7 +140,9 @@ starport scaffold chain github.com/binordev/cosmos-binor1
 # Documentation: https://docs.starport.network
 ```
 
-Now with the project created you should exit the wsl terminal and open the `~/cosmos-binor1` folder in VSCode via `Remote WSL` left-menu.  
+Now with the project created:
+* You should exit the wsl terminal and 
+* open the `~/cosmos-binor1` folder in VSCode via `Remote WSL` left-menu.  
 
 ```bash
 # Build and run your chain
@@ -146,14 +152,52 @@ starport chain serve
 # 📦 Installing dependencies...
 # 🛠️  Building the blockchain...
 # 💿 Initializing the app...
-# 🙂 Created account "alice" with address ...
-# 🙂 Created account "bob" with address ...
-# Genesis transaction written to ...
+# 🙂 Created account "alice" with address ***
+# 🙂 Created account "bob" with address ***
+# Genesis transaction written to ***
 # 🌍 Tendermint node: http://0.0.0.0:26657
 # 🌍 Blockchain API: http://0.0.0.0:1317
 # 🌍 Token faucet: http://0.0.0.0:4500
 ```
 
-Nice - we a node running - with two addresses. I assume they are also funded.
+Nice - we a node running - with two addresses. I assume they are also funded.  
+** Important: Remember to make a note of the seeds - and the addresses **  
+
+## Stop the chain
+
+We stop a chain with ctrl-c. This will also save its state.
+
+```bash
+# Ctrl-C:
+# ^C💿 Saving genesis state...
+# 💿 Genesis state saved in /home/binor/.starport/local-chains/cosmosbinor1/exported_genesis.json
+# aborted
+```
+
+Close VSCode.  
+
+Turn of WSL to see if state can be recovered.  
+
+```bash
+# show wsl state
+wsl -l -v
+# turn off wsl
+wsl --shutdown
+```
+
+Boot your PC.  
+
+In VSCode reopen the stargate project `~/cosmos-binor1` folder in VSCode via `Remote WSL` left-menu.  
+
+From the VSCode terminal restart the chain.   
+It will only display:  
+
+```bash
+starport chain serve
+# ▶️  Restarting existing app...
+# 🌍 Tendermint node: http://0.0.0.0:26657
+# 🌍 Blockchain API: http://0.0.0.0:1317
+# 🌍 Token faucet: http://0.0.0.0:4500
+```
 
 ..
