@@ -200,4 +200,23 @@ starport chain serve
 # 🌍 Token faucet: http://0.0.0.0:4500
 ```
 
+## Publish git repo
+
+With initial code tested it is time to publish repo to git.  
+
+First create a repo in github matching the project name: `cosmos-binor1`
+
+Reopen your project folder in wsl terminal
+
+```bash
+# Add remote repo
+git remote add origin git@github.com:binordev/cosmos-binor1.git
+# Looks ok?
+git remote -v
+# Push to remote repo
+git push -u origin master
+```
+
+Now you can browse and see repo: [binordev/cosmos-binor1](https://github.com/binordev/cosmos-binor1).
+
 ..
