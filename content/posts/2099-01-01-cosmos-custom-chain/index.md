@@ -19,6 +19,7 @@ tags:
 
 I'll be creating a custom Cosmos chain from this [Starport blog](https://docs.starport.com/guide/hello.html).  
 To avoid problems with Windows I'll be running in WSL2.  
+To edit the cosmos project in WSL2 you can use [Remote WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) VSCode plugin.  
 Cosmos is running on GoLang, so that will be installed, too.
 
 The blog is based on starport v0.18.0. I'll be using the [current latest which is v0.18.5](https://github.com/tendermint/starport/releases).  
@@ -85,6 +86,74 @@ starport version
 
 ## Scaffold a chain
 
+```bash
+# goto homedir
+cd ~
 
+# What options do we have?
+starport help
+# Available Commands:
+#   scaffold    Scaffold a new blockchain, module, message, query, and more
+#   chain       Build, initialize and start a blockchain node or perform other actions on the blockchain
+#   generate    Generate clients, API docs from source code
+#   account     Commands for managing accounts
+#   relayer     Connect blockchains by using IBC protocol
+#   tools       Tools for advanced users
+#   docs        Show Starport docs
+#   version     Print the current build information
+#   help        Help about any command
+#   completion  generate the autocompletion script for the specified shell
+
+# What scaffold options do we have?
+starport scaffold --help
+# Available Commands:
+#   chain       Fully-featured Cosmos SDK blockchain
+#   module      Scaffold a Cosmos SDK module
+#   list        CRUD for data stored as an array
+#   map         CRUD for data stored as key-value pairs
+#   single      CRUD for data stored in a single location
+#   type        Scaffold only a type definition
+#   message     Message to perform state transition on the blockchain
+#   query       Query to get data from the blockchain
+#   packet      Message for sending an IBC packet
+#   band        Scaffold an IBC BandChain query oracle to request real-time data
+#   vue         Vue 3 web app template
+
+# What options do we have for scaffolding a new chain?
+starport scaffold chain --help
+# Scaffold a new Cosmos SDK blockchain with a default directory structure
+# Usage:
+#   starport scaffold chain [github.com/org/repo] [flags]
+# Flags:
+#       --address-prefix string   Address prefix (default "cosmos")
+#       --no-module               Prevent scaffolding a default module in the app
+
+starport scaffold chain github.com/binordev/cosmos-binor1
+# ⭐️ Successfully created a new blockchain 'cosmos-binor1'.
+# 👉 Get started with the following commands:
+#  cd cosmos-binor1
+#  starport chain serve
+# Documentation: https://docs.starport.network
+```
+
+Now with the project created you should exit the wsl terminal and open the `~/cosmos-binor1` folder in VSCode via `Remote WSL` left-menu.  
+
+```bash
+# Build and run your chain
+starport chain serve
+# Cosmos SDK's version is: stargate - v0.44.3
+# 🛠️  Building proto...
+# 📦 Installing dependencies...
+# 🛠️  Building the blockchain...
+# 💿 Initializing the app...
+# 🙂 Created account "alice" with address ...
+# 🙂 Created account "bob" with address ...
+# Genesis transaction written to ...
+# 🌍 Tendermint node: http://0.0.0.0:26657
+# 🌍 Blockchain API: http://0.0.0.0:1317
+# 🌍 Token faucet: http://0.0.0.0:4500
+```
+
+Nice - we a node running - with two addresses. I assume they are also funded.
 
 ..
