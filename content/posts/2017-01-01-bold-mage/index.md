@@ -2,7 +2,7 @@
 title: Bold Mage (fake post)
 slug: bold-mage
 date: 2017-01-01
-published: true
+published: false
 cover: ./cover.jpg
 disqus: false
 generate-card: false
