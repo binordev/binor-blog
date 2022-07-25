@@ -57,6 +57,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date
+        lastModified
         slug
         language
         tags

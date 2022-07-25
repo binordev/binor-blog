@@ -27,6 +27,7 @@ class Article extends React.Component {
         <Content
           content={post.body}
           date={post.frontmatter.date}
+          lastModified={post.frontmatter.lastModified}
           tags={post.frontmatter.tags}
           translations={post.frontmatter.translations}
         />

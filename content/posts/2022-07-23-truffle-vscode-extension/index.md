@@ -1,7 +1,8 @@
 ---
-title: Truffle VS Code Extension
+title: Truffle 4 VSCode Extension
 slug: truffle-vscode-extension
 date: 2022-07-23
+lastModified: 2022-07-24
 published: true
 #cover: ./cover.jpg
 disqus: false
@@ -9,10 +10,11 @@ generate-card: false
 language: en
 tags:
     - develop
+    - vscode
+    - extension
     - blockchain
     - ethereum
     - evm
-    - extension
     - truffle
 ---
 
@@ -74,7 +76,7 @@ I am running on:
 
 ## Links
 
-* Blog: [Truffle for VS Code extension](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
+* Blog: [Truffle 4 VSCode extension](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
     * Get [VSCode extension](https://marketplace.visualstudio.com/items?itemName=trufflesuite-csi.truffle-vscode)
     * [Docs/Usage](https://trufflesuite.com/docs/vscode-ext/)
 
