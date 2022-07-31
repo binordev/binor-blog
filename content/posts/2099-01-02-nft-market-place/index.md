@@ -14,6 +14,9 @@ tags:
     - ethereum
     - evm
     - nft
+    - faucet
+    - optimism
+    - infura
 ---
 
 ## Intro
@@ -61,7 +64,17 @@ We need an editor, docker ([for optimism box](https://github.com/truffle-box/opt
     * [MetaMask](https://metamask.io/download/) - choose between app or browser extension
     * Or build-in Wallet in Opera or other browser
 
-## Procedure
+## Development Procedure
+
+Note: You need your Infura or Alchemy project Id for `INFURA_KEY` in file `.env` 
+
+Note: You need your wallet Mnemonic `GOERLI_MNEMONIC` in file `.env` 
+
+
+### Scaffold your project
+
+In truffle scaffolding/unpacking files are called unboxing.  
+For Optimism, there is a pre-defined package you can use:  
 
 ```bash
 # In bash:
@@ -80,8 +93,9 @@ code .
 ![truffle-unbox-optimism](./truffle-unbox-optimism.png)
 _[Files](https://github.com/truffle-box/optimism-box) after `truffle unbox optimism`_
 
+### Examining the package
 
-In `package.json` you find these npm stripts:
+Notice - in `package.json` you find these npm stripts:
 ```json
   // package.json
   "scripts": {
@@ -100,14 +114,24 @@ In `package.json` you find these npm stripts:
   },
 ```
 
+You see there are 
+
+* `:evm` scripts for running towards `L1 Etherium` and
+* `:ovm` scripts for running towards `L2 Optimism`
+
+You see local optimism uses `docker-compose`.  
+
+
 
 ## Links
 
-* Tools:
+* Tools and Docs:
     * Quickstart: [Truffle 4 VSCode](https://trufflesuite.com/docs/vscode-ext/quickstart/)
     * Blog: [Web3 with the Truffle 4 VSCode extension](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
     * Blog: [Getting Started With Infura](https://blog.infura.io/post/getting-started-with-infura-28e41844cc89)
     * Docs: [Optimism Developer docs](https://community.optimism.io/docs/developers/)
+    * Fauset: [Paradigm MultiFaucet](https://faucet.paradigm.xyz)
+    * Connect your wallet to EVM chains via [Chainlist](https://chainlist.org/)
 * Boilerplates: 
     * Optimism box: [Truffle box with code to start working with Optimism L2](https://github.com/truffle-box/optimism-box)
     * @_emjlin's [nft-marketplace-box](https://github.com/truffle-box/nft-marketplace-box)
@@ -118,6 +142,7 @@ In `package.json` you find these npm stripts:
 
 ## Other related links
 
+* [Differences between Ethereum and Optimism](https://community.optimism.io/docs/developers/build/differences/#)
 * Docs: [Truffle Suite](https://trufflesuite.com/docs/)
 * [Solidity documentation](https://docs.soliditylang.org/en/latest/)
 * https://github.com/truffle-box/nft-box

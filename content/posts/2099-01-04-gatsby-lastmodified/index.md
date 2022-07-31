@@ -32,4 +32,8 @@ There is still a bit missing, though.
 There should be added a SEO meta tag, so crawlers will notice the change.  
 That I will add later, perhaps...
 
+## Links
+
+* StackOVerflow: [How to get 'Last Update Date' of a blog post in GATSBY](https://stackoverflow.com/questions/56025679/how-to-get-last-update-date-of-a-blog-post-in-gatsby-js)
+
 ...
