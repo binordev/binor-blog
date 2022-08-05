@@ -61,8 +61,7 @@ We need an editor, docker ([for optimism box](https://github.com/truffle-box/opt
 * Web3 Tools:
     * [Truffle 4 VSCode Extension](./truffle-vscode-extension)
 * Web3 Wallet: 
-    * [MetaMask](https://metamask.io/download/) - choose between app or browser extension
-    * Or build-in Wallet in Opera or other browser
+    * [MetaMask](https://metamask.io/download/) - choose browser extension
 
 ## Development Procedure
 
@@ -121,7 +120,29 @@ You see there are
 
 You see local optimism uses `docker-compose`.  
 
+So what did Emily add?
 
+Now I'll delete the truffle box and install her box
+
+```bash
+# In bash:
+cd <your project-parent-dir>
+rmdir nft-marketplace
+truffle unbox nft-marketplace-box nft-marketplace
+# open project in vscode
+cd nft-marketplace
+code .
+```
+
+You find the diff in [this commit](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8)
+
+She added:
+
+* a [next.js webapp](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-c4577d0b3a9c55c4e75639bb45f3dd659e83bc31b7a30943fda6ef84f7cef47a)
+    * using [tailwind css](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-e048fb8380f32b06b874b12ef1f5e1a69acf2f0bbe88b98fe0c91c98ff884952)
+* marketplace and nft [smart contracts](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-1d4e45b08f1c079108225dc54d333cb784612fdd1d1402fa482a8d55a83bbae0), both for ethereum and optimism
+* [deploye script](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-5719596698146086876ac469ae9de9400d4956c9c94822d968233c3523306415) for contracts
+* she uses kovan instead of goerli [test network](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-8f7ceaa83eaf3c53b82b8dc646e61e0d66a865cec9da0baa4c19b9833baacd0f)
 
 ## Links
 
