@@ -65,10 +65,8 @@ We need an editor, docker ([for optimism box](https://github.com/truffle-box/opt
 
 ## Development Procedure
 
-Note: You need your Infura or Alchemy project Id for `INFURA_KEY` in file `.env` 
-
-Note: You need your wallet Mnemonic `GOERLI_MNEMONIC` in file `.env` 
-
+Note: You need your Infura or Alchemy project Id for `INFURA_KEY` in file `.env`  
+Note: You need your wallet Mnemonic `GOERLI_MNEMONIC` in file `.env`   
 
 ### Scaffold your project
 
@@ -146,9 +144,204 @@ She added:
 
 Emilys code is inspired by [@dabit3](https://twitter.com/dabit3)'s [code](https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/). As Emily her wrote a [blog](https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb) and recorded a [vid](https://www.youtube.com/watch?v=GKJBEEXUha0).  
 
-Opposed to Emily, @dabit3 deploys to Polygon (not Optimism), develops in Hardhat (not Truffle) and uses [ethers](https://www.npmjs.com/package/ethers) (not [web3](https://www.npmjs.com/package/web3)) for Ethereum JS API.  
+Opposed to Emily, @dabit3 deploys to Polygon (not Optimism), develops in Hardhat+Hardhat network (not Truffle+[Ganache](https://trufflesuite.com/blog/introducing-ganache-7/)) and uses [ethers](https://www.npmjs.com/package/ethers) (not [web3](https://www.npmjs.com/package/web3)) for [Ethereum JS API](https://www.section.io/engineering-education/web3js-vs-ethersjs/).  
+Btw - ethers can be configured to use Ganache instead of Hardhat network.  
 
 @dabit3 has supplied a nice link for deploying the webapp to [Gitpod](https://gitpod.io/#github.com/dabit3/polygon-ethereum-nextjs-marketplace). The [gitpod script](https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/blob/main/.gitpod.yml) also deployes the smart contract before it spins up the webserver.  
+
+### Test run on local ganache
+
+If you installed `Truffle 4 VSCode`, then you also intalled `ganache` via npm. If not then revisit Install section.  
+Ganache is our localhost blockchain without being in networking with the outer world.  
+It will create some funded accounts for us. With one of them you then have funds to pay the gas fee for deploying.  
+
+I have put the ganache cli command in a stript including the mnemonic:
+
+```bash
+# scripts/run-gan-dev.sh
+# Start ganache on a certain port and with a certain mnemonic
+ganache -p 7545 --mnemonic 'test test test test test test test test test test test junk'
+```
+
+Then I start ganache from git-bash
+```bash
+# git-bash
+cd scripts
+./run-gan-dev.sh
+# ganache v7.3.2 (@ganache/cli: 0.4.2, @ganache/core: 0.4.2)
+# Starting RPC server
+
+# Available Accounts
+# (0) 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (1000 ETH)
+# (1) 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 (1000 ETH)
+# (2) 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC (1000 ETH)
+
+# Private Keys
+# (0) 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+# (1) 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
+# (2) 0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a
+
+# HD Wallet
+# ==================
+# Mnemonic:      test test test test test test test test test test test junk
+# Base HD Path:  m/44'/60'/0'/0/{account_index}
+
+# Chain Id
+# ==================
+# 1337
+
+# RPC Listening on 127.0.0.1:7545
+```
+**Warning:** Even when you use above mnemonic on test networks, your funds probably will be drained, since bots probably will be listening and then taking your test funds!  
+So if you use it in production networks, then for sure your funds will be drained!  
+
+Since I am running on a non-standard port - 7545 (opposed to standard 8545), then Metamask don't have that network installed.  
+You can [enter a network via this link](http://chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#settings/networks/add-network) in the chrome extension.  
+
+![add-network-to-metamask](./add-network-to-metamask.png)
+
+Next we want to connect Metamask to some of the wallets to transact with the wallets.  
+You can grap some of the private keys and import them into Metamask.  
+
+In Metamask choose `Import Acoount`  
+![import-metamask-account](import-metamask-account.png)  
+... paste a private key from ganache  
+![import-metamask-account-privkey](import-metamask-account-privkey.png)  
+... and rename the account to something decribing - well don't use part of mnemonic in the name on any prod accounts!!!  
+![test-junk-1](test-junk-1.png)  
+So now you can spend your ganache ETH  
+![imported-metamask-accounts](imported-metamask-accounts.png)  
+
+Then we want Truffle to deploy smart contracts using gas on one of the wallets.  
+
+In truffle Emily already have port 7545 defined as default `development` network:  
+```js
+// truffle-config.js
+  networks: {
+    // Useful for testing. The `development` name is special - truffle uses it by default
+    // if it's defined here and no other network is specified at the command line.
+    // You should run a client (like ganache-cli, geth or parity) in a separate terminal
+    // tab if you use this network and you must also set the `host`, `port` and `network_id`
+    // options below to some value.
+    //
+    development: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
+```
+
+She also has told truffle where to find .sol files and where the build output should land:
+```js
+// truffle-config.js
+  // contracts_build_directory tells Truffle where to store compiled contracts
+  contracts_build_directory: './client/contracts/ethereum-contracts',
+  // contracts_directory tells Truffle where to find your contracts
+  contracts_directory: './contracts/ethereum',
+```
+... so with Ganache running then we can go ahead and try to deploy Emily's .sol contracts.  
+From package.json we see two shortcuts for build and deploy:
+
+* build: compile:evm
+* deploy: migrate:evm
+```bash
+# bash:
+# Download npm packages
+npm install
+# If it fails with:
+# Could not install from "node_modules\ganache-core\node_modules\web3-provider-engine\
+#  node_modules\eth-sig-util\ethereumjs-abi@git+https:\github.com\ethereumjs\ethereumjs-abi.git" as it does not contain a package.json file.
+
+# ... then try remove depricated ganache-core from package-lock.json
+# ... or try to install ganache-core first:
+npm install ganache-core@2.13.2 --save-dev # version found in package-lock.json
+# Retry Download npm packages
+npm install
+
+# build .sol
+npm run compile:evm
+# > truffle compile
+# Compiling your contracts...
+# ✓ Fetching solc version list from solc-bin. Attempt #1
+# ✓ Downloading compiler. Attempt #1.
+# > Compiling @openzeppelin\contracts\security\ReentrancyGuard.sol
+# ... and more
+# > Compiling @openzeppelin\contracts\utils\introspection\IERC165.sol
+# > Compiling .\contracts\ethereum\BoredPetsNFT.sol
+# > Compiling .\contracts\ethereum\Marketplace.sol
+# > Artifacts written to \client\contracts\ethereum-contracts
+# > Compiled successfully using:
+#    - solc: 0.8.13+commit.abaa5c0e.Emscripten.clang
+
+# deploy .sol to ganache
+npm run migrate:evm
+# > truffle migrate
+# Compiling your contracts...
+# ... as before
+# > Compiling .\contracts\ethereum\Marketplace.sol
+# > Artifacts written to C:\Users\binor\projs-git\projs-truffle\nft-marketplace\client\contracts\ethereum-contracts
+# > Compiled successfully using:
+#    - solc: 0.8.13+commit.abaa5c0e.Emscripten.clang
+
+# Starting migrations...
+# > Network name:    'development'
+# > Network id:      1660032269451
+# > Block gas limit: 30000000 (0x1c9c380)
+
+# 1_deploy_contracts.js
+# =====================
+
+#    Deploying 'Marketplace'
+#    > transaction hash:    0xa50554c3ebca98b2de2724ac162664edc69bccd061589d2f14690c2fe4a52549
+#    > Blocks: 0            Seconds: 0
+#    > contract address:    0x5FbDB2315678afecb367f032d93F642f64180aa3
+#    > block number:        1
+#    > block timestamp:     1660036505
+#    > account:             0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+#    > balance:             999.99429805225
+#    > gas used:            1689466 (0x19c77a)
+#    > gas price:           3.375 gwei
+#    > value sent:          0 ETH
+#    > total cost:          0.00570194775 ETH
+
+#    Deploying 'BoredPetsNFT'
+#    > transaction hash:    0xff6085508b1bb50c4a183dd14a832ec8521d3ecc4c6348680c7c474b031fe476
+#    > Blocks: 0            Seconds: 0
+#    > contract address:    0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+#    > block number:        2
+#    > block timestamp:     1660036506
+#    > account:             0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+#    > balance:             999.985867137609571701
+#    > gas used:            2572013 (0x273eed)
+#    > gas price:           3.277944023 gwei
+#    > value sent:          0 ETH
+#    > total cost:          0.008430914640428299 ETH
+
+#    > Saving artifacts
+#    > Total cost:     0.014132862390428299 ETH
+```
+The account used for deploying was the test-jump-0 - the account 0 of the ganache accounts.  
+Opening it in Metamask you'll see the gas fee (0.014132862390428299 ETH) withdrawn.  
+
+In Ganache you'll also see the transactions:  
+```text
+# Ganache output
+eth_sendTransaction
+
+  Transaction: 0xa50554c3ebca98b2de2724ac162664edc69bccd061589d2f14690c2fe4a52549   
+  Contract created: 0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Gas usage: 1689466        
+  Block number: 1
+  Block time: Tue Aug 09 2022 11:15:05 GMT+0200 (Central European Summer Time)      
+
+eth_sendTransaction
+
+  Transaction: 0xff6085508b1bb50c4a183dd14a832ec8521d3ecc4c6348680c7c474b031fe476   
+  Contract created: 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Gas usage: 2572013        
+  Block number: 2
+  Block time: Tue Aug 09 2022 11:15:06 GMT+0200 (Central European Summer Time)      
+```
 
 
 ## Links
@@ -158,6 +351,7 @@ Opposed to Emily, @dabit3 deploys to Polygon (not Optimism), develops in Hardhat
     * Blog: [Web3 with the Truffle 4 VSCode extension](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
     * Blog: [Getting Started With Infura](https://blog.infura.io/post/getting-started-with-infura-28e41844cc89)
     * Docs: [Optimism Developer docs](https://community.optimism.io/docs/developers/)
+        * [Running a local development environment](https://community.optimism.io/docs/developers/build/dev-node/#)
     * Fauset: [Paradigm MultiFaucet](https://faucet.paradigm.xyz)
     * Connect your wallet to EVM chains via [Chainlist](https://chainlist.org/)
 * Boilerplates: 
@@ -178,5 +372,6 @@ Opposed to Emily, @dabit3 deploys to Polygon (not Optimism), develops in Hardhat
 * https://github.com/truffle-box/azure-simple-marketplace-box
 * https://github.com/ysharad/nft-marketplace
 * https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb
+* [Hardhat for Visual Studio Code](https://hardhat.org/hardhat-vscode/docs/overview)
 
 ...
