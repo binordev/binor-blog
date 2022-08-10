@@ -152,6 +152,8 @@ Btw - ethers can be configured to use Ganache instead of Hardhat network.
 
 ### Test run on local ganache
 
+#### Spin up local ganache
+
 If you installed `Truffle 4 VSCode`, then you also intalled `ganache` via npm. If not then revisit Install section.  
 Ganache is our localhost blockchain without being in networking with the outer world.  
 It will create some funded accounts for us. With one of them you then have funds to pay the gas fee for deploying.  
@@ -195,6 +197,8 @@ Then I start ganache from git-bash
 **Warning:** Even when you use above mnemonic on test networks, your funds probably will be drained, since bots probably will be listening and then taking your test funds!  
 So if you use it in production networks, then for sure your funds will be drained!  
 
+#### Setup metamask for Ganache
+
 Since I am running on a non-standard port - 7545 (opposed to standard 8545), then Metamask don't have that network installed.  
 You can [enter a network via this link](http://chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#settings/networks/add-network) in the chrome extension.  
 
@@ -211,6 +215,8 @@ In Metamask choose `Import Acoount`
 ![test-junk-1](test-junk-1.png)  
 So now you can spend your ganache ETH  
 ![imported-metamask-accounts](imported-metamask-accounts.png)  
+
+#### Build Smart contracts
 
 Then we want Truffle to deploy smart contracts using gas on one of the wallets.  
 
@@ -273,6 +279,9 @@ npm run compile:evm
 # > Compiled successfully using:
 #    - solc: 0.8.13+commit.abaa5c0e.Emscripten.clang
 ```
+
+#### Deploy build Smart contracts
+
 ```bash
 # bash:
 # deploy .sol to ganache
@@ -345,6 +354,8 @@ eth_sendTransaction
   Block time: Tue Aug 09 2022 11:15:06 GMT+0200 (Central European Summer Time)      
 ```
 
+#### Test deployed contracts
+
 With the contracts deployed we can run the tests Emily build. Her tests is a .js script.  
 .js scripts can be executed with `truffle exec`.  
 The script is hardcoded to read from the `test-jump-0` account, which is also the account, that truffle can sign transactions on.  
@@ -374,6 +385,61 @@ truffle exec scripts/run.js
 Truffle executed several transactions on ganache.  
 Ganache also outputs the transactions.  
 
+Next up we can spin up the frontend.  
+
+#### Summing up
+
+Summing up. If you restart from here you need to
+```bash
+# bash1:
+# start ganache
+./scripts/run-gan-dev.sh
+```
+and in a 2nd terminal
+```bash
+# bash2:
+# rebuild - if you made changes
+npm run compile:evm
+# deploy to ganache
+npm run migrate:evm
+# optionally test
+truffle exec scripts/run.js
+```
+
+#### Spin up next.js frontend
+
+The frontend is in subfolder /client/, so we'll npm from there - in a 3rd terminal:
+
+```bash
+# bash3:
+cd client
+# Download packages
+npm install
+# Build code and run webserver for frontend
+npm run dev
+```
+
+Terminal 3 is now busy with listening for browser requests - so swith to terminal 2, which is free.  
+
+```bash
+# bash2:
+# open frontend in browser
+start http://localhost:3000
+```
+
+First you need to connect one or more of your metamask test-jump accounts to localhost:3000.  
+
+With your account connected, the webapp will know through the wallet account 
+* which chain to contact and
+* what the address of the smart contracts are
+
+The webapp still has some flaws or things to consider:
+* It will complain untill you have a metamask account connected to the webapp
+* It probably will do something unexpected if more than one account is connected - I haven't tried yet
+* It will not upload data to https://ipfs.infura.io - it won't have access
+* It won't show the NFT's created from run.js - since that script is using fake uris 
+
+So when testing your UI you must create new NFTs.  
 
 ## Links
 
@@ -396,7 +462,7 @@ Ganache also outputs the transactions.
 ## Other related links
 
 * [Differences between Ethereum and Optimism](https://community.optimism.io/docs/developers/build/differences/#)
-* Docs: [Truffle Suite](https://trufflesuite.com/docs/)
+* Truffle Docs: [Truffle Suite](https://trufflesuite.com/docs/)
 * [Solidity documentation](https://docs.soliditylang.org/en/latest/)
 * https://github.com/truffle-box/nft-box
 * https://github.com/truffle-box/truffle-creator-box
@@ -404,5 +470,8 @@ Ganache also outputs the transactions.
 * https://github.com/ysharad/nft-marketplace
 * https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb
 * [Hardhat for Visual Studio Code](https://hardhat.org/hardhat-vscode/docs/overview)
+* IPFS Docs: [Command-line quick start](https://docs.ipfs.tech/how-to/command-line-quick-start/#prerequisites)
+* More in IPFS - see Next Steps in [ipfs-http-client](https://www.npmjs.com/package/ipfs-http-client)
+* Truffle Docs about IPFS: [Preserving Files and Content to Storage Platforms](https://trufflesuite.com/docs/truffle/getting-started/preserving-files-and-content-to-storage-platforms/#ipfs)
 
 ...
