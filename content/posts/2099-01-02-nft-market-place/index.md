@@ -17,6 +17,7 @@ tags:
     - faucet
     - optimism
     - infura
+    - ganache
 ---
 
 ## Intro
@@ -166,8 +167,7 @@ ganache -p 7545 --mnemonic 'test test test test test test test test test test te
 Then I start ganache from git-bash
 ```bash
 # git-bash
-cd scripts
-./run-gan-dev.sh
+./scripts/run-gan-dev.sh
 # ganache v7.3.2 (@ganache/cli: 0.4.2, @ganache/core: 0.4.2)
 # Starting RPC server
 
@@ -272,7 +272,9 @@ npm run compile:evm
 # > Artifacts written to \client\contracts\ethereum-contracts
 # > Compiled successfully using:
 #    - solc: 0.8.13+commit.abaa5c0e.Emscripten.clang
-
+```
+```bash
+# bash:
 # deploy .sol to ganache
 npm run migrate:evm
 # > truffle migrate
@@ -342,6 +344,35 @@ eth_sendTransaction
   Block number: 2
   Block time: Tue Aug 09 2022 11:15:06 GMT+0200 (Central European Summer Time)      
 ```
+
+With the contracts deployed we can run the tests Emily build. Her tests is a .js script.  
+.js scripts can be executed with `truffle exec`.  
+The script is hardcoded to read from the `test-jump-0` account, which is also the account, that truffle can sign transactions on.  
+Apparently ganache has some kind of backdoor for truffle to get the private key for signing.  
+
+```bash
+# bash:
+# test deployed contracts
+truffle exec scripts/run.js
+# Using network 'development'.
+
+# MINT AND LIST 3 NFTs
+# listedNfts: 3
+# myNfts: 0
+# myListedNfts 3
+
+# BUY 2 NFTs
+# listedNfts: 1
+# myNfts: 2
+# myListedNfts 1
+
+# RESELL 1 NFT
+# listedNfts: 2
+# myNfts: 1
+# myListedNfts 2
+```
+Truffle executed several transactions on ganache.  
+Ganache also outputs the transactions.  
 
 
 ## Links
