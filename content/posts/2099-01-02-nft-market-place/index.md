@@ -451,6 +451,7 @@ So when testing your UI you must create new NFTs.
         * [Running a local development environment](https://community.optimism.io/docs/developers/build/dev-node/#)
     * Fauset: [Paradigm MultiFaucet](https://faucet.paradigm.xyz)
     * Connect your wallet to EVM chains via [Chainlist](https://chainlist.org/)
+    * Browser plugin: [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/related)
 * Boilerplates: 
     * Optimism box: [Truffle box with code to start working with Optimism L2](https://github.com/truffle-box/optimism-box)
     * @_emjlin's [nft-marketplace-box](https://github.com/truffle-box/nft-marketplace-box)

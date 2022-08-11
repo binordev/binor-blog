@@ -230,6 +230,24 @@ ipfs swarm peers
 start http://127.0.0.1:5001/webui
 ```
 
+You should add to config to avoid CORS and HTTP 403 Forbidden errors
+```json
+// ~/.ipfs/config
+  "API": {
+    "HTTPHeaders": {
+      "Access-Control-Allow-Methods": [
+        "PUT",
+        "GET",
+        "POST"
+      ],
+      "Access-Control-Allow-Origin": [
+        "*"
+      ]
+    }
+  },
+```
+Thanks to [shanelau](https://github.com/ipfs/ipfs-webui/issues/596#issuecomment-314395014)
+
 ### Alt. 2. Using Brave browser build-in ipfs node
 
 When using a Brave browser you'll find [IPFS settings here](http://brave://settings/ipfs)
@@ -246,7 +264,8 @@ With the IPFS Companion you can select which IPFS node you want to query (CLI = 
 
 IPFS Companion will [automatically detect and redirect IPFS resources](https://github.com/ipfs/ipfs-companion#ipfs-companion-features)
 
-
+When a local IPFS node is running you can see it via IPFS Companion  
+![IpfsCompanionPlugin](IpfsCompanionPlugin.png)  
 
 ### Links
 
