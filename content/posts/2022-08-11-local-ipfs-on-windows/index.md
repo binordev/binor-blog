@@ -2,6 +2,7 @@
 title: Local Ipfs node on Windows
 slug: local-ipfs-on-windows
 date: 2022-08-11
+lastModified: 2022-08-11
 published: true
 #cover: ./cover.jpg
 disqus: false
@@ -12,14 +13,22 @@ tags:
     - ipfs
     - blockchain
     - nft
+    - brave
 ---
 
 ### Intro
 
 For IPFS development it can be nice to have your own node running.  
-I am following along [Davi Pedro Bauer's](https://www.amazon.com/Get-Started-Ethereum-Step-Step/dp/B098GY3XDN/ref=sr_1_2?keywords=Get+Started+with+Ethereum&qid=1660209122&sr=8-2) vid [HOW TO CREATE YOUR IPFS NODE](https://www.youtube.com/watch?v=dFWpGn73BBM) to get a node up running.
+The browser extension [IPFS Companion](https://chrome.google.com/webstore/detail/ipfs-companion/nibjojkomfdiaoajekhjakgkdhaomnch) suggests 3 ways:  
+![IpfsCompanionSuggestions](IpfsCompanionSuggestions.png)
 
-### Procedure
+I am here trying out two of them:
+1. IPFS node provided by CLI and
+2. IPFS node Provided by Brave browser 
+
+For 1. I am following along [Davi Pedro Bauer's](https://www.amazon.com/Get-Started-Ethereum-Step-Step/dp/B098GY3XDN/ref=sr_1_2?keywords=Get+Started+with+Ethereum&qid=1660209122&sr=8-2) vid [HOW TO CREATE YOUR IPFS NODE](https://www.youtube.com/watch?v=dFWpGn73BBM) to get a node up running.
+
+### Alt. 1. Installing a local ipfs node
 
 Prerequisites for this instruction:
 * Windows 11 Home
@@ -220,5 +229,29 @@ ipfs swarm peers
 # And WebUI will also complain
 start http://127.0.0.1:5001/webui
 ```
+
+### Alt. 2. Using Brave browser build-in ipfs node
+
+When using a Brave browser you'll find [IPFS settings here](http://brave://settings/ipfs)
+![brave-ipfs-settings](brave-ipfs-settings.png)
+Choose **Brave local IPFS node** and  
+[IPFS Companion](http://chrome-extension://nibjojkomfdiaoajekhjakgkdhaomnch/dist/landing-pages/welcome/index.html)
+
+Also Brave IPFS wants holes in the firewall  
+![firewall-brave](firewall-brave.png)  
+I am usure when it is detected by windows defender - It took a while before it appeared on my PC.  
+
+With the IPFS Companion you can select which IPFS node you want to query (CLI = [External](https://docs.ipfs.tech/how-to/companion-node-types/#external) or [Brave](https://docs.ipfs.tech/how-to/companion-node-types/#provided-by-brave)) from the browser  
+[![IpfsCompanionPreferences](IpfsCompanionPreferences.png)](http://chrome-extension://nibjojkomfdiaoajekhjakgkdhaomnch/dist/options/options.html)
+
+IPFS Companion will [automatically detect and redirect IPFS resources](https://github.com/ipfs/ipfs-companion#ipfs-companion-features)
+
+
+
+### Links
+
+* IPFS Docs: [Command-line quick start](https://docs.ipfs.tech/how-to/command-line-quick-start/)
+* Browser extension: [IPFS Companion](http://chrome-extension://nibjojkomfdiaoajekhjakgkdhaomnch/dist/landing-pages/welcome/index.html)
+* Local [IPFS Privacy issues](https://support.brave.com/hc/en-us/articles/360051406452-How-does-IPFS-Impact-my-Privacy-)
 
 ...
