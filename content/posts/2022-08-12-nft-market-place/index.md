@@ -480,13 +480,15 @@ _4. Your [image in IPFS](http://127.0.0.1:8080/ipfs/QmYMKq84rdtR34eQPjRQeSHy2Uye
 ## Links
 
 * Tools and Docs:
-    * Quickstart: [Truffle 4 VSCode](https://trufflesuite.com/docs/vscode-ext/quickstart/)
-    * Blog: [Web3 with the Truffle 4 VSCode extension](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
-    * Blog: [Getting Started With Infura](https://blog.infura.io/post/getting-started-with-infura-28e41844cc89)
-    * Docs: [Optimism Developer docs](https://community.optimism.io/docs/developers/)
+    * Truffle Quickstart: [Truffle 4 VSCode](https://trufflesuite.com/docs/vscode-ext/quickstart/)
+    * Truffle Blog: [Web3 with the Truffle 4 VSCode extension](https://trufflesuite.com/blog/build-on-web3-with-truffle-vs-code-extension/)
+    * Truffle Docs: [Truffle CLI](https://trufflesuite.com/docs/truffle/reference/truffle-commands/)
+    * Ganache Docs: [Ganache CLI](https://nethereum.readthedocs.io/en/latest/ethereum-and-clients/ganache-cli/)
+    * Optimism Docs: [Developer docs](https://community.optimism.io/docs/developers/)
         * [Running a local development environment](https://community.optimism.io/docs/developers/build/dev-node/#)
     * Fauset: [Paradigm MultiFaucet](https://faucet.paradigm.xyz)
     * Connect your wallet to EVM chains via [Chainlist](https://chainlist.org/)
+    * Infura Blog: [Getting Started](https://blog.infura.io/post/getting-started-with-infura-28e41844cc89)
     * Browser plugin: [Allow CORS: Access-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/related)
 * Boilerplates: 
     * Optimism box: [Truffle box with code to start working with Optimism L2](https://github.com/truffle-box/optimism-box)
