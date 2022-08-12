@@ -1,9 +1,8 @@
 ---
 title: Create a NFT Marketplace DApp on Ethereum and Optimism 
 slug: nft-market-place
-date: 2099-01-01
-lastModified: 2099-01-01
-published: false
+date: 2022-08-12
+published: true
 #cover: ./cover.jpg
 disqus: false
 generate-card: false
@@ -18,22 +17,36 @@ tags:
     - optimism
     - infura
     - ganache
+    - ipfs
 ---
 
 ## Intro
 
 This is my replay of the blog [How to Build a NFT Marketplace DApp on Ethereum and Optimism](https://trufflesuite.com/guides/nft-marketplace/) / [vlog](https://youtu.be/Ie1o34Xh1I4)  
-by [@_emjlin](https://twitter.com/_emjlin).  
+by Emily [@_emjlin](https://twitter.com/_emjlin).  
 
-[Code](https://github.com/truffle-box/nft-marketplace-box) for her project.  
+* [Code](https://github.com/truffle-box/nft-marketplace-box) for her project
+* Slightly modified [code](https://github.com/binordev/nft-marketplace) (of above) for this blog.  
+
+Opposed to Emily I'll deploy only locally to ganache and a local ipfs and run the web locally. And so far I will only do the evm deploy - not to optimism.  
+
+### @dabit3's code
+
+Emilys code is inspired by [@dabit3](https://twitter.com/dabit3)'s [code](https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/). As Emily he wrote a [blog](https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb) and recorded a [vid](https://www.youtube.com/watch?v=GKJBEEXUha0).  
+
+Opposed to Emily, @dabit3 deploys to Polygon (not Optimism), develops in Hardhat+Hardhat network (not Truffle+[Ganache](https://trufflesuite.com/blog/introducing-ganache-7/)) and uses [ethers](https://www.npmjs.com/package/ethers) (not [web3](https://www.npmjs.com/package/web3)) for [Ethereum JS API](https://www.section.io/engineering-education/web3js-vs-ethersjs/).  
+Btw - ethers can be configured to use Ganache instead of Hardhat network.  
+
+@dabit3 has supplied a nice link for deploying the webapp to [Gitpod](https://gitpod.io/#github.com/dabit3/polygon-ethereum-nextjs-marketplace). The [gitpod script](https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/blob/main/.gitpod.yml) also deployes the smart contract before it spins up the webserver.  
 
 ### Glossary
 
-This glossary links to networks you would want to connect to
+This glossary links to networks you might want to connect to
 
 * `EVM` - Ethereum Virtual Machine: A Execution engine that can execute smart contracts on a blockchain
 * `Ethereum`: The `L1` blockchain running `EVM` smart contracts
 * `NFT`: A unique item on a blockchain enabled via `EVM` contracts
+* `IPFS`: A distributed filesystem - like EVM is distributed CPU. Used for storing NFT files and metadata into.  
 * `L2`: A faster and cheaper network than the L1 (Ethereum) network on top of the `L1` network
 * `Optimism`: An Ethereum `L2` technologi and `test network`
     * [Public RPC Endpoints](https://community.optimism.io/docs/useful-tools/networks/#rpc-endpoints)
@@ -53,21 +66,19 @@ This glossary links to networks you would want to connect to
 
 ## Install
 
-We need an editor, docker ([for optimism box](https://github.com/truffle-box/optimism-box#requirements)) and some web3 tools:
+We need an editor, optional docker ([for optimism box](https://github.com/truffle-box/optimism-box#requirements)) and some web3 tools and a local IPFS node:
 
 * Editor:
     * VSCode
-* docker, version 19.03.12 or later (`docker -v`)
-* docker-compose, version 1.27.3 or later (`docker-compose -v`)
-* Web3 Tools:
-    * [Truffle 4 VSCode Extension](./truffle-vscode-extension)
+* Optional: docker, version 19.03.12 or later (`docker -v`)
+* Optional: docker-compose, version 1.27.3 or later (`docker-compose -v`)
+* Web3 Tools (truffle, ganache):
+    * [Truffle 4 VSCode Extension](../2022-07-23-truffle-vscode-extension/)
 * Web3 Wallet: 
     * [MetaMask](https://metamask.io/download/) - choose browser extension
+* Local [IPFS node](../2022-08-11-local-ipfs-on-windows/)
 
 ## Development Procedure
-
-Note: You need your Infura or Alchemy project Id for `INFURA_KEY` in file `.env`  
-Note: You need your wallet Mnemonic `GOERLI_MNEMONIC` in file `.env`   
 
 ### Scaffold your project
 
@@ -140,15 +151,8 @@ She added:
 * a [next.js webapp](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-c4577d0b3a9c55c4e75639bb45f3dd659e83bc31b7a30943fda6ef84f7cef47a)
     * using [tailwind css](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-e048fb8380f32b06b874b12ef1f5e1a69acf2f0bbe88b98fe0c91c98ff884952)
 * marketplace and nft [smart contracts](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-1d4e45b08f1c079108225dc54d333cb784612fdd1d1402fa482a8d55a83bbae0), both for ethereum and optimism
-* [deploye script](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-5719596698146086876ac469ae9de9400d4956c9c94822d968233c3523306415) for contracts
+* [deploy script](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-5719596698146086876ac469ae9de9400d4956c9c94822d968233c3523306415) for contracts
 * she uses kovan instead of goerli [test network](https://github.com/binordev/nft-marketplace/commit/191f7a8442d915b073c9b3d8fcab96e44fb67de8#diff-8f7ceaa83eaf3c53b82b8dc646e61e0d66a865cec9da0baa4c19b9833baacd0f)
-
-Emilys code is inspired by [@dabit3](https://twitter.com/dabit3)'s [code](https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/). As Emily her wrote a [blog](https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb) and recorded a [vid](https://www.youtube.com/watch?v=GKJBEEXUha0).  
-
-Opposed to Emily, @dabit3 deploys to Polygon (not Optimism), develops in Hardhat+Hardhat network (not Truffle+[Ganache](https://trufflesuite.com/blog/introducing-ganache-7/)) and uses [ethers](https://www.npmjs.com/package/ethers) (not [web3](https://www.npmjs.com/package/web3)) for [Ethereum JS API](https://www.section.io/engineering-education/web3js-vs-ethersjs/).  
-Btw - ethers can be configured to use Ganache instead of Hardhat network.  
-
-@dabit3 has supplied a nice link for deploying the webapp to [Gitpod](https://gitpod.io/#github.com/dabit3/polygon-ethereum-nextjs-marketplace). The [gitpod script](https://github.com/dabit3/polygon-ethereum-nextjs-marketplace/blob/main/.gitpod.yml) also deployes the smart contract before it spins up the webserver.  
 
 ### Test run on local ganache
 
@@ -165,8 +169,10 @@ I have put the ganache cli command in a stript including the mnemonic:
 # Start ganache on a certain port and with a certain mnemonic
 ganache -p 7545 --mnemonic 'test test test test test test test test test test test junk'
 ```
+Notice the usage of non-standard port 7545.  
+Reason is that you then can have `ganache` serving EVM on 7545 and `docker optimism` [serving Optimism on standard port 8545](https://community.optimism.io/docs/developers/build/dev-node/#accessing-the-environment).  
 
-Then I start ganache from git-bash
+Then I start ganache from git-bash  
 ```bash
 # git-bash
 ./scripts/run-gan-dev.sh
@@ -196,6 +202,7 @@ Then I start ganache from git-bash
 ```
 **Warning:** Even when you use above mnemonic on test networks, your funds probably will be drained, since bots probably will be listening and then taking your test funds!  
 So if you use it in production networks, then for sure your funds will be drained!  
+  
 
 #### Setup metamask for Ganache
 
@@ -406,12 +413,21 @@ npm run migrate:evm
 truffle exec scripts/run.js
 ```
 
-#### Spin up next.js frontend
+#### Spin up local IPFS node
 
-The frontend is in subfolder /client/, so we'll npm from there - in a 3rd terminal:
-
+The webap is configured for a local IPFS (in client\pages\create-and-list-nft.js), so spin up a node.  
+The node need not connect to a network - so we won't be distributing our test-jpegs to the world.  
 ```bash
 # bash3:
+ipfs daemon --offline
+```
+
+#### Spin up next.js frontend
+
+The frontend is in subfolder /client/, so we'll npm from there - in a 4th terminal:
+
+```bash
+# bash4:
 cd client
 # Download packages
 npm install
@@ -419,7 +435,7 @@ npm install
 npm run dev
 ```
 
-Terminal 3 is now busy with listening for browser requests - so swith to terminal 2, which is free.  
+Terminal 4 is now busy with listening for browser requests and terminal 3 with IPFS - so swith to terminal 2, which is free.  
 
 ```bash
 # bash2:
@@ -436,10 +452,30 @@ With your account connected, the webapp will know through the wallet account
 The webapp still has some flaws or things to consider:
 * It will complain untill you have a metamask account connected to the webapp
 * It probably will do something unexpected if more than one account is connected - I haven't tried yet
-* It will not upload data to https://ipfs.infura.io - it won't have access
+* It will not upload data to https://ipfs.infura.io (if that is your IPFS settings) - it won't have access
 * It won't show the NFT's created from run.js - since that script is using fake uris 
 
 So when testing your UI you must create new NFTs.  
+
+Here is what you see  
+![Mint](Mint.png)  
+_1. Create (Mint) a NFT_  
+
+![Listed](Listed.png)  
+_2. NFTs for sale_  
+
+![MyListed](MyListed.png)  
+_3. Your NFTs for sale_  
+
+![Uploaded-Image](Uploaded-Image.png)
+_4. Your [image in IPFS](http://127.0.0.1:8080/ipfs/QmYMKq84rdtR34eQPjRQeSHy2UyepswbQjbYt3sHq7jyTj)_
+
+### What's next
+
+* Use hosted servers like Infura
+    * Note: You need your Infura or Alchemy project Id for `INFURA_KEY` in file `.env`  
+    * Note: You need your wallet Mnemonic `GOERLI_MNEMONIC` in file `.env`   
+* Deploy to L2 optimism
 
 ## Links
 
@@ -460,14 +496,15 @@ So when testing your UI you must create new NFTs.
     * [@trufflesuite](https://twitter.com/trufflesuite)
     * Support: [ConsenSys on Discord](https://discord.com/invite/QZzArGyKVT)
 
-## Other related links
+### Other related links
 
 * [Differences between Ethereum and Optimism](https://community.optimism.io/docs/developers/build/differences/#)
 * Truffle Docs: [Truffle Suite](https://trufflesuite.com/docs/)
 * [Solidity documentation](https://docs.soliditylang.org/en/latest/)
-* https://github.com/truffle-box/nft-box
-* https://github.com/truffle-box/truffle-creator-box
-* https://github.com/truffle-box/azure-simple-marketplace-box
+* Other Truffle boxes
+    * https://github.com/truffle-box/nft-box
+    * https://github.com/truffle-box/truffle-creator-box
+    * https://github.com/truffle-box/azure-simple-marketplace-box
 * https://github.com/ysharad/nft-marketplace
 * https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb
 * [Hardhat for Visual Studio Code](https://hardhat.org/hardhat-vscode/docs/overview)
