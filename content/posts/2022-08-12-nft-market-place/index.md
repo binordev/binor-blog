@@ -2,6 +2,7 @@
 title: Create a NFT Marketplace DApp on Ethereum and Optimism 
 slug: nft-market-place
 date: 2022-08-12
+lastModified: 2022-08-14
 published: true
 #cover: ./cover.jpg
 disqus: false
@@ -469,6 +470,9 @@ _3. Your NFTs for sale_
 
 ![Uploaded-Image](Uploaded-Image.png)
 _4. Your [image in IPFS](http://127.0.0.1:8080/ipfs/QmYMKq84rdtR34eQPjRQeSHy2UyepswbQjbYt3sHq7jyTj)_
+
+![nft-marketplace.drawio](nft-marketplace.drawio.svg)  
+_Diagram of the code_  
 
 ### What's next
 

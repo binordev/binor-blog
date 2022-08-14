@@ -48,7 +48,7 @@ After saving as SVG, then the online editor continues editing in the SVG file (o
 
 Having created an image I want to use it in Gatsby.  
 You can just save the SVG into your folder containing this `index.md` and use it like any other image:
-```text
+```md
 ![some-text-for-screen-readers](ExampleFlowchartDiagram.drawio.svg)
 ```
 ![ExampleFlowchartDiagram.drawio](ExampleFlowchartDiagram.drawio.svg)
