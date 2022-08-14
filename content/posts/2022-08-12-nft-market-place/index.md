@@ -483,7 +483,7 @@ _3. Your NFTs for sale_
   
 ##### my-nfts.js and resell-nft.js
 Another page (not shown) shows the NFTs you have bought (ususally from others).  
-On that page you have the option to Resell an NFT one of those NFTs  
+On that page you have the option to Resell one of those bought NFTs  
 
 The image belonging to the NFT is stored in IFPF - the NFT is stored onchain  
 ![Uploaded-Image](Uploaded-Image.png)
