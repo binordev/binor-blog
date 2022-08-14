@@ -459,15 +459,33 @@ The webapp still has some flaws or things to consider:
 So when testing your UI you must create new NFTs.  
 
 Here is what you see  
+  
+
+##### create-and-list-nft.js
+1 First you need to create a NFT after uploading and image. When you click `Mint` then two transactions are created and both has to be signed in MetaMask.  
+First tx creates (mints) the NFT.  
+Second tx transfer ownership of the NFT to the marketplace contract.  
 ![Mint](Mint.png)  
 _1. Create (Mint) a NFT_  
-
+  
+  
+##### index.js (home)
+With something for sale anyone can buy the NFT on the home page and thus tranfer ownership to them.  
 ![Listed](Listed.png)  
-_2. NFTs for sale_  
-
+_2. All NFTs for sale_  
+  
+  
+##### my-listed-nfts.js
+A page displays which NFTs you have for sale  
 ![MyListed](MyListed.png)  
 _3. Your NFTs for sale_  
+  
+  
+##### my-nfts.js and resell-nft.js
+Another page (not shown) shows the NFTs you have bought (ususally from others).  
+On that page you have the option to Resell an NFT one of those NFTs  
 
+The image belonging to the NFT is stored in IFPF - the NFT is stored onchain  
 ![Uploaded-Image](Uploaded-Image.png)
 _4. Your [image in IPFS](http://127.0.0.1:8080/ipfs/QmYMKq84rdtR34eQPjRQeSHy2UyepswbQjbYt3sHq7jyTj)_
 
