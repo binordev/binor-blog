@@ -1,8 +1,8 @@
 ---
 title: Adding Last Modified to Gatsby
 slug: gatsby-lastmodified
-date: 2099-01-01
-published: false
+date: 2022-08-16
+published: true
 #cover: ./cover.jpg
 disqus: false
 generate-card: false
