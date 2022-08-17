@@ -2,7 +2,7 @@
 title: Git tips
 slug: git-tips
 date: 2022-08-16
-published: false
+published: true
 #cover: ./cover.jpg
 disqus: false
 generate-card: false
