@@ -25,10 +25,10 @@ git remote -v
 # origin  git@github.com:binordev/binor-blog.git (push)
 ```
 
-### Rename a folder - so git history remains intacts
+### Rename a folder - so git history remains intact
 
 ```bash
-# git bash
+# git bash:
 # goto some commen parent folder
 cd ../..
 # move folders somewhere below
@@ -39,7 +39,7 @@ git mv ./child1/old-folder ./child2/new-folder
 
 * Browse to your [commits](https://github.com/binordev/binor-blog/commits/master)
 * Select two to compare by copying commitid
-* paste the commitid into a url like in
+* paste the commitid into a url like in  
 [https://github.com/binordev/binor-blog/compare/f2f2356a92f6294c8b7813bff2473649a034492e...bd0a4a852f94f8394b689fdd5006037d288b3570](https://github.com/binordev/binor-blog/compare/f2f2356a92f6294c8b7813bff2473649a034492e...bd0a4a852f94f8394b689fdd5006037d288b3570)
 
 Ref: [Comparing commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/viewing-and-comparing-commits/comparing-commits)  

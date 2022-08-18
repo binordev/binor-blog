@@ -21,6 +21,8 @@ Google showed me some links howto let it be done automatiocally when committing 
 I wanted it to be controlled by me in the top YAML of the Gatsby blog post. Here is how it is typed (as `lastModified`) in the post:  
 
 ```yaml
+# /posts/someblog/index.md
+# yaml in top of our post:
 date: 2022-07-30
 lastModified: 2022-07-31
 published: true
@@ -34,6 +36,6 @@ That I will add later, perhaps...
 
 ## Links
 
-* StackOVerflow: [How to get 'Last Update Date' of a blog post in GATSBY](https://stackoverflow.com/questions/56025679/how-to-get-last-update-date-of-a-blog-post-in-gatsby-js)
+* StackOverflow: [How to get 'Last Update Date' of a blog post in GATSBY](https://stackoverflow.com/questions/56025679/how-to-get-last-update-date-of-a-blog-post-in-gatsby-js)
 
 ...
